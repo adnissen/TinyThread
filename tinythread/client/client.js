@@ -3,5 +3,10 @@ threadsSubscription = Meteor.subscribe("threads");
 directorySubscription = Meteor.subscribe("directory");
 
 Template.threadView.thread = function() {
-	return Threads.find();
+  var threadId = Session.get('currentThreadId');
+	return Threads.find({_id: threadId});
   };
+
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_AND_EMAIL'
+});

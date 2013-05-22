@@ -17,7 +17,11 @@ Meteor.publish("directory", function(){
 });
 
 Meteor.publish("threads", function(){
-	return Threads.find({});
+	if (!this.userId)
+		return null;
+	//you only get the threads you're id'd for
+	var user = Meteor.users.findOne({_id: this.userId});
+	return Threads.find({_id : {$in: user.authList}});
 });
 
 Meteor.publish("replies", function(){
@@ -27,16 +31,40 @@ Meteor.publish("replies", function(){
 Meteor.startup(function () {
     // code to run on server at startup
     if (Threads.find({}).count() == 0)
-    	Threads.insert({owner_id: 91283710239, owner_username: "Andrew", title: "Towels?", content: "I think we need new towels guys"});
+    	Threads.insert({owner_id: 91283710239, owner_username: "adnissen", title: "Towels?", content: "I think we need new towels guys"});
 
+});
+
+//add an auth list for when the users are created
+Accounts.onCreateUser(function(options, user) {
+  user.authList = [];
+  // We still want the default hook's 'profile' behavior.
+  if (options.profile)
+    user.profile = options.profile;
+  return user;
 });
 
 //permissions: 0 for public, 1 for private
 //if something is public, anyone can view or post in it
 //if it's private, only invited people can post
 Meteor.methods({
-	createThread:function(_permissions, _title, _content)
+	createThread:function(_title, _content)
 	{
-		Threads.insert({owner: Meteor.userId(), permissions: _permissions, title: _title, content: _content});
+		var newThreadId = Threads.insert({owner_id: Meteor.userId(), owner_username: Meteor.user().username, title: _title, content: _content});
+		Meteor.users.update({_id: Meteor.userId()}, {$push: {authList: newThreadId}});
+	},
+
+	//grant post access to another user
+	authUser:function(_thread, _username)
+	{
+		//check to make sure the person running this command is the author of the thread
+		if (Meteor.userId() != null && Meteor.userId() == Threads.findOne({_id: _thread}).owner_id)
+		{
+			//make sure the user exists
+			if (Meteor.users.find({username: _username}).count() == 1)
+			{
+				Meteor.users.update({username: _username}, {$push: {authList: _thread}});
+			}
+		}
 	}
 });

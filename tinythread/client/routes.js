@@ -3,14 +3,26 @@ Meteor.Router.add({
 
   '/posts/:id': function(id) {
 
-  	if (Threads.find({_id: id}).count() != 0)
+  	//are they logged in?
+  	if (Meteor.user())
   	{
-	    console.log('we are at ' + this.canonicalPath);
-	    console.log("our parameters: " + this.params);
+	  	if (Threads.find({_id: id}).count() != 0)
+	  	{
+		    console.log('we are at ' + this.canonicalPath);
+		    console.log("our parameters: " + this.params);
 
-	    // access parameters in order a function args too
-	    Session.set('currentPostId', id);
-	    return 'threadView';
+		    // access parameters in order a function args too
+		    //only actually let them into the page if they're authed
+		    //honestly, this step might not be needed, since they
+		    //shouldn't have the content anyways. 
+
+		    //better safe than sorry!
+		    if (Meteor.user().authList.indexOf(id) > -1)
+		    {
+			    Session.set('currentThreadId', id);
+			    return 'threadView';
+			}
+		}
 	}
 	else
 		return 'not_found';
