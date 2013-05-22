@@ -3,13 +3,10 @@
 </head>
 
 <body>
-  {{> hello}}
+  {{> threadView}}
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" /><br>
+<template name="threadView">
   {{#each thread}}
   <h3>{{title}}</h3>
   (created by <strong>{{owner_username}}</strong>)
