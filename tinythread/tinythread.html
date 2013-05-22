@@ -1,15 +1,74 @@
 <head>
   <title>tinythread</title>
+  <style type="text/css">
+      body{
+        background-color: #FAFAFA;
+        font-family: georgia;
+      }
+      .bigText {
+        font-size: 21px;
+        letter-spacing: 2px;
+        color: #333333;
+        line-height: 30px;
+      }
+      .replies .contribute {
+        font-size: 16px;
+        letter-spacing: 2px;
+        line-height: 22px;
+      }
+      textarea {
+        resize: none;
+        width: 100%;
+      }
+      hr {
+        margin: 20px 0;
+        border: 0;
+        border-top: 1px solid #eeeeee;
+        border-bottom: 1px solid #ffffff;
+      }
+  </style>
 </head>
 
 <body>
+<div class="container">
   {{> threadView}}
+</div>
 </body>
 
 <template name="threadView">
   {{#each thread}}
-  <h3>{{title}}</h3>
-  (created by <strong>{{owner_username}}</strong>)
-  <p>{{content}}</p>
+  <div class="row bigText">
+      <div class="span8 offset2">
+        <h1>{{title}}</h1>
+        <small>(created by <strong>{{owner_username}}</strong>)</small><br><br>
+      </div>
+    </div>
+<div class="row bigText">
+      <div class="span8 offset2">
+        <p>{{content}}</p><hr>
+      </div>
+    </div>
+
+    <div class="row replies">
+      <div class="span7 offset2">
+        <strong>tgetsome</strong>
+        <p>Ut in luctus sem. Phasellus eu eros nulla, nec molestie purus.</p>
+
+        <strong>psychosidious</strong>
+        <p>Donec id bibendum diam. Proin hendrerit, magna ut dictum pellentesque, libero libero rhoncus orci, sed tempus ipsum tellus eu lacus.</p>
+
+        <strong>adnissen</strong>
+        <p>In sed magna consequat augue vestibulum tincidunt id mollis mi. Praesent erat tortor, fringilla non interdum eget, convallis vel odio. Mauris at diam sit amet mi rhoncus lacinia et eu ante. Donec commodo posuere ante, nec semper eros blandit ut. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent nec augue elit, eget luctus tellus. Phasellus quis nulla lectus. Integer tincidunt hendrerit arcu, sed vestibulum neque commodo eu. Etiam aliquam nisl in ante pretium ut lacinia magna pulvinar. Nulla mollis vulputate odio ut placerat. Aenean imperdiet, risus rutrum semper interdum, dui lacus adipiscing tellus, scelerisque malesuada quam urna eu nisi.</p>
+
+        <hr>
+      </div>
+    </div>
+
+    <div class="row contribute">
+      <div class="span7 offset2">
+        <strong>contribute:</strong><br>
+        <textarea rows="7"></textarea>
+      </div>
+    </div>
   {{/each}}
 </template>
