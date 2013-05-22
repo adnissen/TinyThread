@@ -1,4 +1,5 @@
-Threads = new Meteor.Collection("threads")
+Threads = new Meteor.Collection("threads");
+Replies = new Meteor.Collection("replies");
 Threads.allow({
 	insert: function(userId, thread) {
 		return false;
@@ -19,10 +20,14 @@ Meteor.publish("threads", function(){
 	return Threads.find({});
 });
 
+Meteor.publish("replies", function(){
+	return Replies.find({})
+});
+
 Meteor.startup(function () {
     // code to run on server at startup
     if (Threads.find({}).count() == 0)
-    	Threads.insert({owner_id: 91283710239, owner_username: "Andrew", permissions: 0, title: "Towels?", content: "I think we need new towels guys"});
+    	Threads.insert({owner_id: 91283710239, owner_username: "Andrew", title: "Towels?", content: "I think we need new towels guys"});
 
 });
 

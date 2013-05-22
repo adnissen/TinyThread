@@ -32,10 +32,14 @@
 </head>
 
 <body>
-<div class="container">
-  {{> threadView}}
+<div class="container"> 
+  {{renderPage}}
 </div>
 </body>
+
+<template name="home">
+  this will eventually be the homepage
+</template>
 
 <template name="threadView">
   {{#each thread}}
@@ -74,4 +78,8 @@
       </div>
     </div>
   {{/each}}
+</template>
+
+<template name="not_found">
+not found yo
 </template>
