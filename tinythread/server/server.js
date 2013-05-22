@@ -8,7 +8,7 @@ Threads.allow({
 		return false;
 	},
 	remove: function(userId, thread) {
-		return false; //just making all these fals to start
+		return false; //just making all these false to start
 	}
 });
 
@@ -25,7 +25,10 @@ Meteor.publish("threads", function(){
 });
 
 Meteor.publish("replies", function(){
-	return Replies.find({})
+	if (!this.userId)
+		return null;
+	var user = Meteor.users.findOne({_id: this.userId});
+	return Replies.find({parent: {$in: user.authList}});
 });
 
 Meteor.startup(function () {
@@ -65,6 +68,16 @@ Meteor.methods({
 			{
 				Meteor.users.update({username: _username}, {$push: {authList: _thread}});
 			}
+		}
+	},
+
+	//add a comment
+	addReply:function(_thread, _content)
+	{
+		//make sure they're logged in and can comment
+		if (Meteor.userId() != null && Meteor.user().authList.indexOf(_thread) > -1)
+		{
+			Replies.insert({owner_id: Meteor.userId(), owner_username: Meteor.user().username, parent: _thread, content: _content});
 		}
 	}
 });

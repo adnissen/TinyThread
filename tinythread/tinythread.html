@@ -55,18 +55,15 @@
         <p>{{content}}</p><hr>
       </div>
     </div>
+  {{/each}}
+
 
     <div class="row replies">
       <div class="span7 offset2">
-        <strong>tgetsome</strong>
-        <p>Ut in luctus sem. Phasellus eu eros nulla, nec molestie purus.</p>
-
-        <strong>psychosidious</strong>
-        <p>Donec id bibendum diam. Proin hendrerit, magna ut dictum pellentesque, libero libero rhoncus orci, sed tempus ipsum tellus eu lacus.</p>
-
-        <strong>adnissen</strong>
-        <p>In sed magna consequat augue vestibulum tincidunt id mollis mi. Praesent erat tortor, fringilla non interdum eget, convallis vel odio. Mauris at diam sit amet mi rhoncus lacinia et eu ante. Donec commodo posuere ante, nec semper eros blandit ut. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent nec augue elit, eget luctus tellus. Phasellus quis nulla lectus. Integer tincidunt hendrerit arcu, sed vestibulum neque commodo eu. Etiam aliquam nisl in ante pretium ut lacinia magna pulvinar. Nulla mollis vulputate odio ut placerat. Aenean imperdiet, risus rutrum semper interdum, dui lacus adipiscing tellus, scelerisque malesuada quam urna eu nisi.</p>
-
+        {{#each reply}}
+        <strong>{{owner_username}}</strong>
+        <p>{{content}}</p>
+        {{/each}}
         <hr>
       </div>
     </div>
@@ -78,7 +75,6 @@
         <button class="btn btn-info">Submit</button>
       </div>
     </div>
-  {{/each}}
 </template>
 
 <template name="not_found">
