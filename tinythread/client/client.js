@@ -14,6 +14,12 @@ Template.threadView.reply = function() {
   return Replies.find({parent: threadId});
 };
 
+Template.threadView.events({
+  'click button.btnReply' : function(){
+    Meteor.call("addReply", Session.get('currentThreadId'), document.getElementById('txtContent').value);
+  }
+});
+
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
 });
