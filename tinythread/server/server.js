@@ -75,7 +75,7 @@ Meteor.methods({
 		{
 			if (Meteor.user().owned_groups.indexOf(_group) > -1)
 			{
-				var user = Meteor.users.find({username: _username})
+				var user = Meteor.users.findOne({username: _username})
 				if (user.groups.indexOf(_group) > -1)
 					return "already in group";
 				else
