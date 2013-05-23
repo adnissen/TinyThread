@@ -14,6 +14,14 @@ Template.threadView.reply = function() {
   return Replies.find({parent: threadId});
 };
 
+Template.threadView.loggedAndAuthed = function() {
+  var threadId = Session.get('currentThreadId');
+  if (Meteor.user() && Threads.findOne({_id: threadId}).public == 2)
+    return true;
+  else
+    return (Meteor.user() && Meteor.user().authList.indexOf(threadId) > -1);
+};
+
 Template.threadView.events({
   'click button.btnReply' : function(){
     Meteor.call("addReply", Session.get('currentThreadId'), document.getElementById('txtContent').value);

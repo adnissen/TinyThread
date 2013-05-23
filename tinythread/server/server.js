@@ -18,10 +18,10 @@ Meteor.publish("directory", function(){
 
 Meteor.publish("threads", function(){
 	if (!this.userId)
-		return null;
+		return Threads.find({public: 1});
 	//you only get the threads you're id'd for
 	var user = Meteor.users.findOne({_id: this.userId});
-	return Threads.find({_id : {$in: user.authList}});
+	return Threads.find({$or: [{_id : {$in: user.authList}}, {public: 1}]});
 });
 
 Meteor.publish("replies", function(){
@@ -51,10 +51,13 @@ Accounts.onCreateUser(function(options, user) {
 //if something is public, anyone can view or post in it
 //if it's private, only invited people can post
 Meteor.methods({
-	createThread:function(_title, _content)
+	createThread:function(_title, _content, _public)
 	{
-		var newThreadId = Threads.insert({owner_id: Meteor.userId(), owner_username: Meteor.user().username, title: _title, content: _content});
-		Meteor.users.update({_id: Meteor.userId()}, {$push: {authList: newThreadId}});
+		if (Meteor.userId() != null)
+		{
+			var newThreadId = Threads.insert({public: _public, owner_id: Meteor.userId(), owner_username: Meteor.user().username, title: _title, content: _content});
+			Meteor.users.update({_id: Meteor.userId()}, {$push: {authList: newThreadId}});
+		}
 	},
 
 	//grant post access to another user
