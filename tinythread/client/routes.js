@@ -21,14 +21,6 @@ Meteor.Router.add({
 			return 'threadView';
 		}
 	}
-	else if (Threads.find({_id: id}).count() != 0)
-	{
-		if (Threads.findOne({_id: id}).public == 1)
-		{
-			Session.set('currentThreadId', id);
-			return 'threadView';
-		}
-	}
 	else
 		return 'not_found';
   },

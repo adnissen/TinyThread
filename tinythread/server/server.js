@@ -18,14 +18,14 @@ Meteor.publish("directory", function(){
 
 Meteor.publish("threads", function(){
 	if (!this.userId)
-		return Threads.find({public: 1});
+		return null;
 	//you only get the threads you're id'd for
 	var user = Meteor.users.findOne({_id: this.userId});
 	return Threads.find({$or: [{_id : {$in: user.authList}}, {public: 1}]});
 });
 
 Meteor.publish("replies", function(){
-	
+
 	if (!this.userId)
 		return null;
 	var user = Meteor.users.findOne({_id: this.userId});
