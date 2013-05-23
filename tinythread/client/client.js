@@ -11,7 +11,7 @@ Template.threadView.thread = function() {
 
 Template.threadView.reply = function() {
   var threadId = Session.get('currentThreadId');
-  return Replies.find({parent: threadId});
+  return Replies.find({parent: threadId}, {sort: {time: -1}});
 };
 
 Template.threadView.loggedAndAuthed = function() {

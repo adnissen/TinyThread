@@ -56,7 +56,9 @@ Meteor.methods({
 	{
 		if (Meteor.userId() != null)
 		{
-			var newThreadId = Threads.insert({public: _public, owner_id: Meteor.userId(), owner_username: Meteor.user().username, title: _title, content: _content});
+			var time = new Date();
+			var timestamp = time.getTime();
+			var newThreadId = Threads.insert({time: timestamp, public: _public, owner_id: Meteor.userId(), owner_username: Meteor.user().username, title: _title, content: _content});
 			Meteor.users.update({_id: Meteor.userId()}, {$push: {authList: newThreadId}});
 		}
 	},
@@ -81,7 +83,9 @@ Meteor.methods({
 		//make sure they're logged in and can comment
 		if (Meteor.userId() != null && Meteor.user().authList.indexOf(_thread) > -1)
 		{
-			Replies.insert({owner_id: Meteor.userId(), owner_username: Meteor.user().username, parent: _thread, content: _content});
+			var time = new Date();
+			var timestamp = time.getTime();
+			Replies.insert({time: timestamp, owner_id: Meteor.userId(), owner_username: Meteor.user().username, parent: _thread, content: _content});
 		}
 
 	}

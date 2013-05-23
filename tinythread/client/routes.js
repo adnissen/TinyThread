@@ -2,7 +2,6 @@ Meteor.Router.add({
   '/' : 'home',
 
   '/posts/:id': function(id) {
-
   	//are they logged in?
   	if (Meteor.user())
   	{
@@ -24,6 +23,16 @@ Meteor.Router.add({
 	else
 		return 'not_found';
   },
+
+  '/create': function() {
+  	//make sure they're logged in
+  	if (Meteor.user())
+  	{
+  		
+  	}
+  	else
+  		return 'not_found';
+  }
 
   '*': 'not_found'
 });
