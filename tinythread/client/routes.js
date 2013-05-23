@@ -17,11 +17,8 @@ Meteor.Router.add({
 		    //shouldn't have the content anyways. 
 
 		    //better safe than sorry!
-		    if (Meteor.user().authList.indexOf(id) > -1)
-		    {
-			    Session.set('currentThreadId', id);
-			    return 'threadView';
-			}
+			Session.set('currentThreadId', id);
+			return 'threadView';
 		}
 	}
 	else

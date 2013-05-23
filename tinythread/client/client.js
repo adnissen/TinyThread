@@ -17,6 +17,7 @@ Template.threadView.reply = function() {
 Template.threadView.events({
   'click button.btnReply' : function(){
     Meteor.call("addReply", Session.get('currentThreadId'), document.getElementById('txtContent').value);
+    document.getElementById('txtContent').value = "";
   }
 });
 
