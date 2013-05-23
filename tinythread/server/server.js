@@ -82,5 +82,6 @@ Meteor.methods({
 		{
 			Replies.insert({owner_id: Meteor.userId(), owner_username: Meteor.user().username, parent: _thread, content: _content});
 		}
+
 	}
 });
