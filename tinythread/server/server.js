@@ -1,5 +1,6 @@
 Threads = new Meteor.Collection("threads");
 Replies = new Meteor.Collection("replies");
+Groups = new Meteor.Collection("groups");
 Threads.allow({
 	insert: function(userId, thread) {
 		return false;
@@ -25,11 +26,14 @@ Meteor.publish("threads", function(){
 });
 
 Meteor.publish("replies", function(){
-
 	if (!this.userId)
 		return null;
 	var user = Meteor.users.findOne({_id: this.userId});
 	return Replies.find({parent: {$in: user.authList}});
+});
+
+Meteor.publish("groups", function(){
+	return Groups.find();
 });
 
 Meteor.startup(function () {
@@ -42,6 +46,8 @@ Meteor.startup(function () {
 //add an auth list for when the users are created
 Accounts.onCreateUser(function(options, user) {
   user.authList = [];
+  user.groups = [];
+  user.owned_groups = [];
   // We still want the default hook's 'profile' behavior.
   if (options.profile)
     user.profile = options.profile;
@@ -52,7 +58,17 @@ Accounts.onCreateUser(function(options, user) {
 //if something is public, anyone can view or post in it
 //if it's private, only invited people can post
 Meteor.methods({
-	createThread:function(_title, _content, _public)
+	createGroup: function(_name, _description)
+	{
+		if (Meteor.userId() != null)
+		{
+			var time = new Date();
+			var timestamp = time.getTime();
+			var newGroupId = Groups.insert({createdTime: timestamp, owner_id: Meteor.userId(), owner_username: Meteor.user().username, name: _name, description: _description});
+			Meteor.users.update({_id: Meteor.userId()}, {$push: {owned_groups: newGroupId}});
+		}
+	},
+	createThread:function(_title, _content, _public, _groups)
 	{
 		if (Meteor.userId() != null)
 		{
@@ -60,6 +76,7 @@ Meteor.methods({
 			var timestamp = time.getTime();
 			var newThreadId = Threads.insert({time: timestamp, public: _public, owner_id: Meteor.userId(), owner_username: Meteor.user().username, title: _title, content: _content});
 			Meteor.users.update({_id: Meteor.userId()}, {$push: {authList: newThreadId}});
+			var groupusers = Meteor.users.find({groups: {$in: _groups}});
 		}
 	},
 
