@@ -105,7 +105,11 @@ Meteor.methods({
 			var timestamp = time.getTime();
 			var newThreadId = Threads.insert({time: timestamp, public: _public, owner_id: Meteor.userId(), owner_username: Meteor.user().username, title: _title, content: _content});
 			Meteor.users.update({_id: Meteor.userId()}, {$push: {authList: newThreadId}});
-			var groupusers = Meteor.users.find({groups: {$in: _groups}});
+			for (var i = 0; i < _groups.length; i++) {
+				console.log(_groups[i] + " thread: " + newThreadId);
+				Meteor.users.update({$or: [{groups: _groups[i]}, {owned_groups: _groups[i]}]}, {$push: {authList: newThreadId}}, {multi: true});
+			};
+			console.log(newThreadId);
 		}
 	},
 
