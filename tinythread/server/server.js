@@ -47,6 +47,7 @@ Meteor.startup(function () {
 Accounts.onCreateUser(function(options, user) {
   user.authList = [];
   user.groups = [];
+  user.invites = [];
   user.owned_groups = [];
   // We still want the default hook's 'profile' behavior.
   if (options.profile)
@@ -66,6 +67,34 @@ Meteor.methods({
 			var timestamp = time.getTime();
 			var newGroupId = Groups.insert({createdTime: timestamp, owner_id: Meteor.userId(), owner_username: Meteor.user().username, name: _name, description: _description});
 			Meteor.users.update({_id: Meteor.userId()}, {$push: {owned_groups: newGroupId}});
+		}
+	},
+	inviteUserToGroup: function(_group, _username)
+	{
+		if (Meteor.userId() != null)
+		{
+			if (Meteor.user().owned_groups.indexOf(_group) > -1)
+			{
+				var user = Meteor.users.find({username: _username})
+				if (user.groups.indexOf(_group) > -1)
+					return "already in group";
+				else
+					Meteor.users.update({username: _username}, {$push: {invites: _group}});
+			}
+		}
+	},
+	acceptGroup: function(_group)
+	{
+		if (Meteor.userId() != null)
+		{
+			if (Meteor.user().owned_groups.indexOf(_group) > -1 || Meteor.user().groups.indexOf(_group) > -1)
+				return null;
+			else if (Meteor.user().invites.indexOf(_group) > -1)
+			{
+				Meteor.users.update({_id: Meteor.userId()}, {$push: {groups: _group}});
+				Meteor.users.update({_id: Meteor.userId()}, {$pull: {invites: _group}});
+			}
+
 		}
 	},
 	createThread:function(_title, _content, _public, _groups)
