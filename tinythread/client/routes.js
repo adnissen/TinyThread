@@ -28,11 +28,11 @@ Meteor.Router.add({
   	//make sure they're logged in
   	if (Meteor.user())
   	{
-  		
+
   	}
   	else
   		return 'not_found';
-  }
+  },
 
   '*': 'not_found'
 });
