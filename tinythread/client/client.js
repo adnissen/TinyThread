@@ -16,7 +16,8 @@ Template.threadView.reply = function() {
 
 Template.threadView.loggedAndAuthed = function() {
   var threadId = Session.get('currentThreadId');
-  return (Meteor.user() && Meteor.user().authList.indexOf(threadId) > -1);
+  if (Meteor.user() != null && Meteor.user().authList.indexOf(threadId) > -1)
+    return true;
 };
 
 Template.threadView.events({

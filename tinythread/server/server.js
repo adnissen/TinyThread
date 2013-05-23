@@ -25,6 +25,7 @@ Meteor.publish("threads", function(){
 });
 
 Meteor.publish("replies", function(){
+	
 	if (!this.userId)
 		return null;
 	var user = Meteor.users.findOne({_id: this.userId});
