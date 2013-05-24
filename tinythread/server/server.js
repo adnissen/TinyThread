@@ -175,5 +175,13 @@ Meteor.methods({
 			Replies.insert({time: timestamp, owner_id: Meteor.userId(), owner_username: Meteor.user().username, parent: _thread, content: _content});
 		}
 
+	},
+	deleteReply:function(_reply)
+	{
+		if (Meteor.userId() != null && Meteor.userId() == Replies.findOne({_id: _reply}).owner_id)
+		{
+			Replies.remove({_id: _reply});
+			
+		}
 	}
 });

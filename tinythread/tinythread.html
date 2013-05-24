@@ -61,8 +61,10 @@
     <div class="row replies">
       <div class="span7 offset2">
         {{#each reply}}
-        <strong>{{owner_username}}</strong>
-        <p>{{content}}</p>
+        <div class="reply">
+          <strong>{{owner_username}}</strong> {{#if selected}}<a href="#" class="delete">delete</a>{{/if}}
+          <p>{{content}}</p>
+        </div>
         {{/each}}
         <hr>
       </div>
