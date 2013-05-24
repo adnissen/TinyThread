@@ -93,6 +93,8 @@ Meteor.methods({
 			{
 				Meteor.users.update({_id: Meteor.userId()}, {$push: {groups: _group}});
 				Meteor.users.update({_id: Meteor.userId()}, {$pull: {invites: _group}});
+				var group = Groups.findOne({_id: _group});
+				Meteor.users.update({_id: Meteor.userId()}, {$push: {authList: {$each: group.threads}}});
 			}
 
 		}
