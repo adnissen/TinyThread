@@ -77,6 +77,34 @@
     </div>
 </template>
 
+<template name="groupPage">
+  {{#each group}}
+  <div class="row bigText">
+      <div class="span8 offset2">
+        <h1>{{name}}</h1>
+        <small>(created by <strong>{{owner_username}}</strong>)</small><br><br>
+      </div>
+    </div>
+<div class="row bigText">
+      <div class="span8 offset2">
+        <p>{{description}}</p><hr>
+      </div>
+    </div>
+  {{/each}}
+
+  {{#each groupThread}}
+  <div class="row replies">
+    <div class="span8 offset2">
+      <a href="/posts/{{_id}}"><strong>{{title}}</strong></a> <small>(created by {{owner_username}})</small>
+    </div>
+  </div>
+  {{/each}}
+</template>
+
 <template name="not_found">
 not found yo
+</template>
+
+<template name="group_not_found">
+group not found yo
 </template>

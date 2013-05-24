@@ -65,7 +65,7 @@ Meteor.methods({
 		{
 			var time = new Date();
 			var timestamp = time.getTime();
-			var newGroupId = Groups.insert({createdTime: timestamp, owner_id: Meteor.userId(), owner_username: Meteor.user().username, name: _name, description: _description});
+			var newGroupId = Groups.insert({createdTime: timestamp, owner_id: Meteor.userId(), owner_username: Meteor.user().username, name: _name, description: _description, threads: []});
 			Meteor.users.update({_id: Meteor.userId()}, {$push: {owned_groups: newGroupId}});
 		}
 	},
@@ -76,7 +76,7 @@ Meteor.methods({
 			if (Meteor.user().owned_groups.indexOf(_group) > -1)
 			{
 				var user = Meteor.users.findOne({username: _username})
-				if (user.groups.indexOf(_group) > -1)
+				if (user.groups.indexOf(_group) > -1 || user.owned_groups.indexOf(_group) > -1)
 					return "already in group";
 				else
 					Meteor.users.update({username: _username}, {$push: {invites: _group}});
@@ -142,6 +142,7 @@ Meteor.methods({
 			for (var i = 0; i < _groups.length; i++) {
 				console.log(_groups[i] + " thread: " + newThreadId);
 				Meteor.users.update({$or: [{groups: _groups[i]}, {owned_groups: _groups[i]}]}, {$push: {authList: newThreadId}}, {multi: true});
+				Groups.update({_id: _groups[i]}, {$push: {threads: newThreadId}});
 			};
 			console.log(newThreadId);
 		}

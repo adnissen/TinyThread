@@ -24,6 +24,19 @@ Meteor.Router.add({
 		return 'not_found';
   },
 
+  '/groups/:id': function(id) {
+  	if (Meteor.user())
+  	{
+  		if (Groups.find({_id: id}).count() != 0)
+  		{
+  			Session.set('currentGroupId', id);
+  			return 'groupPage';
+  		}
+  	}
+  	else
+  		return 'group_not_found';
+  },
+
   '/create': function() {
   	//make sure they're logged in
   	if (Meteor.user())
