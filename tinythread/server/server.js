@@ -112,7 +112,7 @@ Meteor.methods({
 				if (Meteor.user().owned_groups.indexOf(_group) > -1)
 				{
 					//if owner: transfer ownership to the next user
-					var newOwner = Meteor.users.findOne({groups: _group);
+					var newOwner = Meteor.users.findOne({groups: _group});
 					Meteor.users.update({_id: newOwner._id}, {$pull: {groups: _group}});
 					Meteor.users.update({_id: newOwner._id}, {$push: {owned_groups: _group}});
 
