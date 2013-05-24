@@ -97,6 +97,36 @@ Meteor.methods({
 
 		}
 	},
+	leaveGroup: function(_group)
+	{
+		if (Meteor.userId() != null)
+		{
+			if (Groups.find({_id: _group}).count() == 1)
+			{
+				if (Meteor.users.find({$in: {groups: _group}}).count() == 0)
+				{
+					//the person leaving is the only one left and it can go ahread and die
+					Meteor.users.update({_id: Meteor.userId()}, {$pull: {owned_groups: _group}});
+					Groups.remove({_id: _group});
+				}
+				if (Meteor.user().owned_groups.indexOf(_group) > -1)
+				{
+					//if owner: transfer ownership to the next user
+					var newOwner = Meteor.users.findOne({$in: {groups: _group}});
+					Meteor.users.update({_id: newOwner._id}, {$pull: {groups: _group}});
+					Meteor.users.update({_id: newOwner._id}, {$push: {owned_groups: _group}});
+
+					//now remove it from the original user
+					Meteor.users.update({_id: Meteor.userId()}, {$pull: {owned_groups: _group}});
+				}
+				else
+				{
+					//if they're just a normal member, removing them is easy
+					Meteor.users.update({_id: Meteor.userId()}, {$pull: {groups: _group}});
+				}
+			}
+		}
+	},
 	createThread:function(_title, _content, _public, _groups)
 	{
 		if (Meteor.userId() != null)
