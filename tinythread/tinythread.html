@@ -192,7 +192,30 @@
     </div>
   </template>
   <template name="home">
-  this will eventually be the homepage
+  {{#if loggedIn}}
+
+  {{#if threadCount}}
+  {{#each thread}}
+  <div class="row replyname">
+    <div class="span6 offset1">
+      <a href="/posts/{{_id}}"><strong>{{title}}</strong></a> <small>(created by {{owner_username}})</small>
+    </div>
+  </div>
+  {{/each}}
+  {{else}}
+  <h2>You're not a part of any threads! Why don't you make one?</h2>
+  {{/if}}
+
+  {{#each group}}
+  <div class='row replyname'>
+    <div class="span6 offset1">
+      <a href="/groups/{{_id}}"><strong>{{name}}</strong></a>
+    </div>
+  </div>
+  {{/each}} 
+
+  {{else}}
+  {{/if}}
   </template>
 
   <template name="threadView">

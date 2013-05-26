@@ -14,7 +14,7 @@ Threads.allow({
 });
 
 Meteor.publish("directory", function(){
-	return Meteor.users.find({});
+	return Meteor.users.find({}, {fields: {'groups': 1, 'owned_groups': 1}});
 });
 
 Meteor.publish("threads", function(){
@@ -181,7 +181,7 @@ Meteor.methods({
 		if (Meteor.userId() != null && Meteor.userId() == Replies.findOne({_id: _reply}).owner_id)
 		{
 			Replies.remove({_id: _reply});
-			
+
 		}
 	}
 });
