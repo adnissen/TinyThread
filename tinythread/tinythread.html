@@ -1,112 +1,278 @@
-<head>
-  <title>tinythread</title>
-  <meta name="viewport" content="width=device-width, initial-scale=.9">
-  <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
-  <style type="text/css">
-      body{
-        background-color: #FAFAFA;
-        font-family: georgia;
-      }
-      .bigText {
-        font-size: 21px;
-        letter-spacing: 2px;
-        color: #333333;
-        line-height: 30px;
-      }
-      .replies .contribute {
-        font-size: 16px;
-        letter-spacing: 2px;
-        line-height: 22px;
-      }
-      textarea {
-        resize: none;
-        width: 95%;
-      }
-      hr {
-        margin: 20px 0;
-        border: 0;
-        border-top: 1px solid #eeeeee;
-        border-bottom: 1px solid #ffffff;
-      }
-  </style>
-</head>
 
-<body>
-<div class="container">
-  {{loginButtons}}<br>
-  {{renderPage}}
-</div>
-</body>
+  <head>
+    <title>Template</title>
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <script src="http://code.jquery.com/jquery.js"></script>
 
-<template name="home">
-  this will eventually be the homepage
-</template>
+    <style type="text/css">
+    
+    @media (min-width: 1200px){
+      .container {
+          background-color: #FFFFFF;
+          max-width: 724px;
+          padding-right: 30px;
+          padding-left: 30px;
+          padding-bottom: 30px;
+          border-right: 1px solid #3498db;
+          border-bottom: 1px solid #3498db;
+          border-left: 1px solid #3498db;
+        }
 
-<template name="threadView">
-  {{#each thread}}
-  <div class="row bigText">
-      <div class="span8 offset2">
-        <h1>{{title}}</h1>
-        <small>(created by <strong>{{owner_username}}</strong>)</small><br><br>
+        html, body {
+          background-color: #EEEEEE;
+          height: 100%;
+          font-color: #e3e3e3;
+          font-family: 'Lato', sans-serif;
+          line-height: 25px;
+        }
+    }
+
+    @media (min-width: 786px){
+      .container {
+          background-color: #FFFFFF;
+          max-width: 724px;
+          padding-right: 30px;
+          padding-left: 30px;
+          padding-bottom: 30px;
+          border-right: 1px solid #3498db;
+          border-bottom: 1px solid #3498db;
+          border-left: 1px solid #3498db;
+        }
+
+        html, body {
+          background-color: #EEEEEE;
+          height: 100%;
+          font-color: #e3e3e3;
+          font-family: 'Lato', sans-serif;
+          line-height: 25px;
+        }
+    }
+
+     @media (min-width: 641px) and (max-width: 785px) { 
+      .container {
+          background-color: #FFFFFF;
+          max-width: 724px;
+          padding-right: 30px;
+          padding-left: 30px;
+          padding-bottom: 30px;
+          border-right: 1px solid #3498db;
+          border-bottom: 1px solid #3498db;
+          border-left: 1px solid #3498db;
+        }
+
+        html, body {
+          background-color: #EEEEEE;
+          height: 100%;
+          font-color: #e3e3e3;
+          font-family: 'Lato', sans-serif;
+          line-height: 25px;
+        }
+      }
+
+      @media (max-width: 640px) and (max-height: 1136px) {
+        .container {
+          background-color: #FFFFFF;
+        }
+        html, body {
+          background-color: #FFFFFF;
+          height: 100%;
+          font-color: #e3e3e3;
+          font-family: 'Lato', sans-serif;
+          line-height: 25px;
+        }
+      }
+
+
+    h1, h2, h3 {
+      color: #3498db;
+    } 
+    h4 {
+      color: #3498db;
+    }
+    .op {
+      font-size: 18px;
+    }
+    .reply {
+      font-size: 14px;
+    }
+    .replyname{
+      color: #3498db;
+    }
+    textarea {
+      resize: none;
+      width: 95%;
+    }
+    hr {
+      margin: 20px 0;
+      border: 0;
+      border-top: 1px solid #3498db;
+      border-border: 1px solid #3498db;
+    }
+
+    .nav{
+      font-size: 16px;
+    }
+
+    .navbar-inner {
+      background-color: #3498db; 
+      background-image: none;
+      background-image: none;
+      background-image: none;
+      background-image: none;
+      background-image: none;
+      background-image: none;
+      background-repeat: no-repeat;
+      filter: none;
+    }
+
+    a:link {color:#3498db; dsplay: none; font-size: 18px;}      /* unvisited link */
+    a:visited {color:#3498db;}  /* visited link */
+    a:hover {color:#3498db;}  /* mouse over link */
+    a:active {color:#3498db;}  /* selected link */
+
+    .navLink {
+      margin-top: 8px;
+      margin-right: 20px;
+      color: #ffffff;
+      font-size: 20px;
+    }
+
+     .btn-custom-lighten.active {
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .btn-custom-lighten {
+        color: #ffffff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        background-color: #45a1de;
+        background-image: -moz-linear-gradient(top, #3498db, #5faee3);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3498db), to(#5faee3));
+        background-image: -webkit-linear-gradient(top, #3498db, #5faee3);
+        background-image: -o-linear-gradient(top, #3498db, #5faee3);
+        background-image: linear-gradient(to bottom, #3498db, #5faee3);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3498db', endColorstr='#ff5faee3', GradientType=0);
+        border-color: #5faee3 #5faee3 #258cd1;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        *background-color: #5faee3;
+        /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+      }
+      .btn-custom-lighten:hover,
+      .btn-custom-lighten:focus,
+      .btn-custom-lighten:active,
+      .btn-custom-lighten.active,
+      .btn-custom-lighten.disabled,
+      .btn-custom-lighten[disabled] {
+        color: #ffffff;
+        background-color: #5faee3;
+        *background-color: #4aa3df;
+      }
+      .btn-custom-lighten:active,
+      .btn-custom-lighten.active {
+        background-color: #3498db ;
+      }
+      
+    </style>
+  </head>
+  <body>
+  <div class="container">
+    {{> navBar}}
+    {{renderPage}}
+  </div>
+  </body>
+  <template name="navBar">
+    <div class="row">
+      <div class="span1 offset1">
+        <a href="/">rltalk.io</a>
+        {{loginButtons}}
       </div>
     </div>
-<div class="row bigText">
-      <div class="span8 offset2">
-        <p>{{content}}</p><hr>
+  </template>
+  <template name="home">
+  this will eventually be the homepage
+  </template>
+
+  <template name="threadView">
+  {{#each thread}}
+  <div class="row">
+      <div class="span6 offset1">
+        <h1>{{title}}</h1>
+        <h4>created by {{owner_username}}</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span6 offset1 op">
+        <p>{{content}}</p>
+
+        <hr>
       </div>
     </div>
   {{/each}}
 
 
-    <div class="row replies">
-      <div class="span7 offset2">
         {{#each reply}}
-        <div class="reply">
-          <strong>{{owner_username}}</strong> {{#if selected}}<a href="#" class="delete">delete</a>{{/if}}
-          <p>{{content}}</p>
-        </div>
+        <div class="row">
+      <div class="span1 replyname">
+        <strong>{{owner_username}}</strong><br>
+        {{#if selected}}<a href="#" class="delete">delete</a>{{/if}}
+      </div>
+      <div class="span6 reply">
+        <p>{{content}}</p>
+      </div>
+    </div>
         {{/each}}
-        <hr>
+    </div>
+
+    <div class="row">
+      <div class="span6 offset1">
+          <hr>
       </div>
     </div>
 
-    <div class="row contribute">
-      <div class="span7 offset2">
-        <strong>contribute:</strong><br>
+
+    <div class="row">
+      <div class="span1 replyname">
+         <strong>contribute:</strong><br>
+      </div>
+      <div class="span6">
         <textarea id="txtContent" rows="7"></textarea><br>
-        <button class="btnReply btn btn-info">Submit</button>
+        <button class="btnReply btn btn-custom-lighten">Submit</button>
       </div>
     </div>
 </template>
 
 <template name="groupPage">
-  {{#each group}}
-  <div class="row bigText">
-      <div class="span8 offset2">
+{{#each group}}
+  <div class="row">
+      <div class="span6 offset1">
         <h1>{{name}}</h1>
         <small>(created by <strong>{{owner_username}}</strong>)</small><br><br>
       </div>
     </div>
-<div class="row bigText">
-      <div class="span8 offset2">
+<div class="row">
+      <div class="span6 offset1 op">
         <p>{{description}}</p><hr>
       </div>
     </div>
   {{/each}}
 
   {{#each groupThread}}
-  <div class="row replies">
-    <div class="span8 offset2">
+  <div class="row replyname">
+    <div class="span6 offset1">
       <a href="/posts/{{_id}}"><strong>{{title}}</strong></a> <small>(created by {{owner_username}})</small>
     </div>
   </div>
   {{/each}}
 </template>
 
-<template name="not_found">
-not found yo
-</template>
+  <template name="not_found">
+  not found yo
+  </template>
 
-<template name="group_not_found">
-group not found yo
-</template>
+  <template name="group_not_found">
+  group not found yo
+  </template>

@@ -30,15 +30,14 @@ Template.threadView.events({
     document.getElementById('txtContent').value = "";
   },
 
-  'mouseenter div.reply' : function(){
+  'click div.reply' : function(){
     if (Meteor.userId() != null && Meteor.userId() == Replies.findOne({_id: this._id}).owner_id)
     {
-      Session.set("selectedReply", this._id);
+      if (Session.get("selectedReply") != this._id)
+        Session.set("selectedReply", this._id);
+      else
+        Session.set("selectedReply", null);
     }
-  },
-
-  'mouseleave div.reply': function(){
-    Session.set("selectedReply", null);
   },
 
   'click a.delete' : function() {
