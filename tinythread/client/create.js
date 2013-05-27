@@ -1,16 +1,8 @@
-Template.home.loggedIn = function() {
+Template.create.loggedIn = function() {
 	return (Meteor.userId());
 }
 
-Template.home.threadCount = function() {
-	return Threads.find().count();
-}
-
-Template.home.thread = function() {
-	return Threads.find();
-}
-
-Template.home.group = function() {
+Template.create.group = function() {
 	if (Meteor.user() && Meteor.user().groups)
 	{
 		console.log(Meteor.user());

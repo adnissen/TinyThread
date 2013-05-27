@@ -32,7 +32,7 @@ Meteor.Router.add({
   			Session.set('currentGroupId', id);
   			return 'groupPage';
   		}
-  	}
+  	}	
   	else
   		return 'group_not_found';
   },
@@ -41,7 +41,7 @@ Meteor.Router.add({
   	//make sure they're logged in
   	if (Meteor.user())
   	{
-
+  		return 'create';
   	}
   	else
   		return 'not_found';

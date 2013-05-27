@@ -292,6 +292,32 @@
   {{/each}}
 </template>
 
+<template name="create">
+  {{#if loggedIn}}
+  <div class="row">
+    <div class="span6 offset1">
+
+      <h2>Create a new discussion!</h2>
+      Title: <br>
+      <input type="textbox" class="newThreadTitle">
+      <br>
+
+      Content: <br>
+      <textarea rows=7 id="txtContent"></textarea>
+      <br>
+
+      Groups (you can select multiple): <br>
+      <select multiple="multiple">
+        {{#each group}}
+        <option>{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  {{/if}}
+</template>
+
   <template name="not_found">
   not found yo
   </template>
