@@ -24,6 +24,15 @@ Template.threadView.selected = function() {
   }
 };
 
+Template.threadView.owner = function() {
+  if (Meteor.userId())
+  {
+    var threadId = Session.get('currentThreadId');
+    var thread = Threads.findOne({_id: threadId});
+    return (thread.owner_id == Meteor.userId());
+  }
+};
+
 Template.threadView.events({
   'click button.btnReply' : function(){
     Meteor.call("addReply", Session.get('currentThreadId'), document.getElementById('txtContent').value);
@@ -45,3 +54,12 @@ Template.threadView.events({
     Session.set("selectedReply", null);
   },
 });
+
+Template.threadView.events(okCancelEvents('#invite', {
+  ok: function(text, evt){
+    var threadId = Session.get('currentThreadId');
+    var username = document.getElementById('invite').value;
+    Meteor.call("authUser", threadId, username);
+    document.getElementById('invite').value = "";
+  }
+}));

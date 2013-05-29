@@ -237,6 +237,11 @@
       <div class="span6 offset1">
         <h1>{{title}}</h1>
         <h4>created by {{owner_username}}</h4>
+        {{#if owner}}
+        Invite a Friend
+        <input type="textbox" class="small" id="invite" placeholder="username">
+        <br>  
+        {{/if}}
       </div>
     </div>
 
@@ -287,7 +292,7 @@
         {{#if owner}}
         Invite a Friend
         <input type="textbox" class="small" id="invite" placeholder="username">
-        <br>
+        <br>  
         {{/if}}
 
       </div>
