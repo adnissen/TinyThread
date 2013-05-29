@@ -7,8 +7,8 @@
     <script src="http://code.jquery.com/jquery.js"></script>
 
     <style type="text/css">
-    
-    @media (min-width: 1200px){
+  
+     @media (min-width: 641px){ 
       .container {
           background-color: #FFFFFF;
           max-width: 724px;
@@ -16,48 +16,7 @@
           padding-left: 30px;
           padding-bottom: 30px;
           border-right: 1px solid #3498db;
-          border-bottom: 1px solid #3498db;
-          border-left: 1px solid #3498db;
-        }
-
-        html, body {
-          background-color: #EEEEEE;
-          height: 100%;
-          font-color: #e3e3e3;
-          font-family: 'Lato', sans-serif;
-          line-height: 25px;
-        }
-    }
-
-    @media (min-width: 786px){
-      .container {
-          background-color: #FFFFFF;
-          max-width: 724px;
-          padding-right: 30px;
-          padding-left: 30px;
-          padding-bottom: 30px;
-          border-right: 1px solid #3498db;
-          border-bottom: 1px solid #3498db;
-          border-left: 1px solid #3498db;
-        }
-
-        html, body {
-          background-color: #EEEEEE;
-          height: 100%;
-          font-color: #e3e3e3;
-          font-family: 'Lato', sans-serif;
-          line-height: 25px;
-        }
-    }
-
-     @media (min-width: 641px) and (max-width: 785px) { 
-      .container {
-          background-color: #FFFFFF;
-          max-width: 724px;
-          padding-right: 30px;
-          padding-left: 30px;
-          padding-bottom: 30px;
-          border-right: 1px solid #3498db;
+          border-top: 1px solid #3498db;
           border-bottom: 1px solid #3498db;
           border-left: 1px solid #3498db;
         }
@@ -137,8 +96,8 @@
     a:active {color:#3498db;}  /* selected link */
 
     .navLink {
-      margin-top: 8px;
-      margin-right: 20px;
+      margin-top: 10px;
+      margin-left: 10px;
       color: #ffffff;
       font-size: 20px;
     }
@@ -188,10 +147,14 @@
   </div>
   </body>
   <template name="navBar">
-    <div class="row">
-      <div class="span1 offset1">
-        <a href="/">rltalk.io</a>
-        {{loginButtons}}
+    <div class="navbar">
+      <div class="navbar-inner">
+        <ul class="nav">
+          <li><a href="/">rltalk.io</a></li>
+          <li><a href="/posts/new">New Post</a></li>
+          <li><a href="/groups/new">New Group</a></li>
+          <li class="navLink">{{loginButtons}}</li>
+        </ul>
       </div>
     </div>
   </template>
