@@ -146,7 +146,20 @@ Meteor.methods({
 				Meteor.users.update({$or: [{groups: _groups[i]}, {owned_groups: _groups[i]}]}, {$push: {authList: newThreadId}}, {multi: true});
 				Groups.update({_id: _groups[i]}, {$push: {threads: newThreadId}});
 			};
-			console.log(newThreadId);
+			return newThreadId;
+		}
+	},
+
+	deleteThread:function(_thread)
+	{
+		if (Meteor.userId() != null)
+		{
+			var group = Groups.findOne({_id: _thread});
+			if (group.owner_id == Meteor.userId())
+			{
+				Groups.remove({_id: _thread});
+				Users.update({authList: _thread}, {$pull: {authList: _thread}}, {multi: true});
+			}
 		}
 	},
 

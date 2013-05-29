@@ -299,7 +299,7 @@
 
       <h2>Create a new discussion!</h2>
       Title: <br>
-      <input type="textbox" class="newThreadTitle">
+      <input type="textbox" id="newThreadTitle">
       <br>
 
       Content: <br>
@@ -307,11 +307,13 @@
       <br>
 
       Groups (you can select multiple): <br>
-      <select multiple="multiple">
+      <select multiple="multiple" id="groupSelect">
         {{#each group}}
-        <option>{{name}}</option>
+        <option value="{{_id}}">{{name}}</option>
         {{/each}}
       </select>
+      <br>
+      <button class="btnCreateThread btn btn-custom-lighten">Submit</button>
     </div>
   </div>
 
