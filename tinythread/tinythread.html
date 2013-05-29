@@ -91,6 +91,10 @@
     h4 {
       color: #3498db;
     }
+    .small {
+      width: 100px;
+      font-size: 12px;
+    }
     .op {
       font-size: 18px;
     }
@@ -195,6 +199,11 @@
   {{#if loggedIn}}
 
   {{#if threadCount}}
+  <div class="row replyname">
+    <div class="span6 offset1">
+  <h4>Posts:</h4>
+  </div>
+  </div>
   {{#each thread}}
   <div class="row replyname">
     <div class="span6 offset1">
@@ -205,7 +214,11 @@
   {{else}}
   <h2>You're not a part of any threads! Why don't you make one?</h2>
   {{/if}}
-
+  <div class="row replyname">
+    <div class="span6 offset1">
+  <h4>Groups:</h4>
+  </div>
+  </div>
   {{#each group}}
   <div class='row replyname'>
     <div class="span6 offset1">
@@ -258,10 +271,7 @@
 
 
     <div class="row">
-      <div class="span1 replyname">
-         <strong>contribute:</strong><br>
-      </div>
-      <div class="span6">
+      <div class="span6 offset1">
         <textarea id="txtContent" rows="7"></textarea><br>
         <button class="btnReply btn btn-custom-lighten">Submit</button>
       </div>
@@ -273,10 +283,15 @@
   <div class="row">
       <div class="span6 offset1">
         <h1>{{name}}</h1>
-        <small>(created by <strong>{{owner_username}}</strong>)</small><br><br>
+        <small>(created by <strong>{{owner_username}}</strong>)</small><br>
+        {{#if owner}}
+        Invite a Friend
+        <input type="textbox" class="small" id="invite" placeholder="username">
+        {{/if}}
+        <br>
       </div>
     </div>
-<div class="row">
+  <div class="row">
       <div class="span6 offset1 op">
         <p>{{description}}</p><hr>
       </div>
@@ -317,6 +332,26 @@
     </div>
   </div>
 
+  {{/if}}
+</template>
+
+<template name="createGroup">
+{{#if loggedIn}}
+  <div class="row">
+    <div class="span6 offset1">
+
+      <h2>Create a new discussion!</h2>
+      Name: <br>
+      <input type="textbox" id="newThreadTitle">
+      <br>
+
+      Description: <br>
+      <textarea rows=7 id="txtContent"></textarea>
+      <br>
+      <br>
+      <button class="btnCreateThread btn btn-custom-lighten">Submit</button>
+    </div>
+  </div>
   {{/if}}
 </template>
 

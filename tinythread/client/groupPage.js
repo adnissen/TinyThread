@@ -9,3 +9,25 @@ Template.groupPage.groupThread = function() {
 	console.log(Threads.find({_id: group.threads}).count());
 	return Threads.find({_id: {$in: group.threads}});
 };
+
+Template.groupPage.owner = function() {
+	var groupId = Session.get('currentGroupId');
+	if (Meteor.user())
+	{
+		if (Meteor.user().owned_groups.indexOf(groupId) > -1)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+};
+
+Template.groupPage.events(okCancelEvents('invite', {
+	ok: function(text, evt){
+		var groupId = Session.get('currentGroupId');
+		var username = document.getElementById('invite').value;
+		Meteor.call("inviteUserToGroup", groupId, username);
+		document.getElementById('invite').value = "";
+	}
+}));
