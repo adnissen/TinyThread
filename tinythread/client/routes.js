@@ -29,6 +29,16 @@ Meteor.Router.add({
 		return 'not_found';
   },
 
+  '/groups/new' : function() {
+	//make sure they're logged in
+  	if (Meteor.user())
+  	{
+  		return 'createGroup';
+  	}
+  	else
+  		return 'not_found';
+  },
+
   '/groups/:id': function(id) {
   	if (Meteor.user())
   	{

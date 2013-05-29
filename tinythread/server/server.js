@@ -67,19 +67,24 @@ Meteor.methods({
 			var timestamp = time.getTime();
 			var newGroupId = Groups.insert({createdTime: timestamp, owner_id: Meteor.userId(), owner_username: Meteor.user().username, name: _name, description: _description, threads: []});
 			Meteor.users.update({_id: Meteor.userId()}, {$push: {owned_groups: newGroupId}});
+			return newGroupId;
 		}
 	},
 	inviteUserToGroup: function(_group, _username)
 	{
 		if (Meteor.userId() != null)
 		{
-			if (Meteor.user().owned_groups.indexOf(_group) > -1)
+			var user = Meteor.users.findOne({username: _username});
+			if (user)
 			{
-				var user = Meteor.users.findOne({username: _username})
-				if (user.groups.indexOf(_group) > -1 || user.owned_groups.indexOf(_group) > -1)
-					return "already in group";
-				else
-					Meteor.users.update({username: _username}, {$push: {invites: _group}});
+				if (Meteor.user().owned_groups.indexOf(_group) > -1)
+				{
+					
+					if (user.groups.indexOf(_group) > -1 || user.owned_groups.indexOf(_group) > -1)
+						return "already in group";
+					else
+						Meteor.users.update({username: _username}, {$push: {invites: _group}});
+				}
 			}
 		}
 	},

@@ -23,7 +23,7 @@ Template.groupPage.owner = function() {
 	}
 };
 
-Template.groupPage.events(okCancelEvents('invite', {
+Template.groupPage.events(okCancelEvents('#invite', {
 	ok: function(text, evt){
 		var groupId = Session.get('currentGroupId');
 		var username = document.getElementById('invite').value;
