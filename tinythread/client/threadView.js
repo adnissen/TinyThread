@@ -53,6 +53,23 @@ Template.threadView.events({
     Meteor.call("deleteReply", this._id);
     Session.set("selectedReply", null);
   },
+
+  'click button.btnDeleteThread' : function() {
+    var threadId = Session.get('currentThreadId');
+    Meteor.call("deleteThread", threadId, function(err, data){
+      Meteor.Router.to("/");
+    });
+  },
+
+  'click button.btnUnSub' : function() {
+    var threadId = Session.get('currentThreadId');
+    Meteor.call("leaveThread", threadId, function(err, data){
+      threadsSubscription = Meteor.subscribe("threads");
+      repliesSubscription = Meteor.subscribe("replies");
+      groupsSubscription = Meteor.subscribe("groups");
+      Meteor.Router.to("/");
+    });
+  }
 });
 
 Template.threadView.events(okCancelEvents('#invite', {

@@ -27,6 +27,7 @@ Template.groupPage.events({
 	'click button.btnLeaveGroup' : function() {
 		var groupId = Session.get('currentGroupId');
 		Meteor.call("leaveGroup", groupId, function(data, err){
+			groupsSubscription = Meteor.subscribe("groups");
 			Meteor.Router.to('/');
 		});
 	}

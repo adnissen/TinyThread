@@ -159,11 +159,11 @@ Meteor.methods({
 	{
 		if (Meteor.userId() != null)
 		{
-			var group = Groups.findOne({_id: _thread});
-			if (group.owner_id == Meteor.userId())
+			var thread = Threads.findOne({_id: _thread});
+			if (thread.owner_id == Meteor.userId())
 			{
-				Groups.remove({_id: _thread});
-				Users.update({authList: _thread}, {$pull: {authList: _thread}}, {multi: true});
+				Threads.remove({_id: _thread});
+				Meteor.users.update({authList: _thread}, {$pull: {authList: _thread}}, {multi: true});
 			}
 		}
 	},
@@ -175,7 +175,7 @@ Meteor.methods({
 			var group = Groups.findOne({_id: _thread});
 			if (Meteor.user().authList.indexOf(_thread) > -1)
 			{
-				Users.update({authList: _thread}, {$pull: {authList: _thread}});
+				Meteor.users.update({authList: _thread}, {$pull: {authList: _thread}});
 			}
 		}
 	},
