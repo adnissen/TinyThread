@@ -7,7 +7,7 @@ Template.home.threadCount = function() {
 }
 
 Template.home.thread = function() {
-	return Threads.find();
+	return Threads.find({}, {sort: {time: -1}});
 }
 
 Template.home.group = function() {

@@ -61,7 +61,10 @@
       font-size: 14px;
     }
     .replyname{
-      color: #3498db;
+      color: #e3e3e3;
+    }
+    .list{
+      font-color: #e3e3e3;
     }
     textarea {
       resize: none;
@@ -90,10 +93,10 @@
       filter: none;
     }
 
-    a:link {color:#3498db; dsplay: none; font-size: 18px;}      /* unvisited link */
-    a:visited {color:#3498db;}  /* visited link */
-    a:hover {color:#3498db;}  /* mouse over link */
-    a:active {color:#3498db;}  /* selected link */
+    a:link {color: #161616; font-size: 18px;}      /* unvisited link */
+    a:visited {color: #161616;}  /* visited link */
+    a:hover {color: #161616;}  /* mouse over link */
+    a:active {color: #161616;}  /* selected link */
 
     .navLink {
       margin-top: 10px;
@@ -168,7 +171,7 @@
   </div>
   </div>
   {{#each thread}}
-  <div class="row replyname">
+  <div class="row list">
     <div class="span6 offset1">
       <a href="/posts/{{_id}}"><strong>{{title}}</strong></a> <small>(created by {{owner_username}})</small>
     </div>
@@ -183,7 +186,7 @@
   </div>
   </div>
   {{#each group}}
-  <div class='row replyname'>
+  <div class='row list'>
     <div class="span6 offset1">
       <a href="/groups/{{_id}}"><strong>{{name}}</strong></a>
     </div>
@@ -309,7 +312,7 @@
   <div class="row">
     <div class="span6 offset1">
 
-      <h2>Create a new discussion!</h2>
+      <h2>Create a new group!</h2>
       Name: <br>
       <input type="textbox" id="newThreadTitle">
       <br>
