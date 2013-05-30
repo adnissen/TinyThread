@@ -23,6 +23,15 @@ Template.groupPage.owner = function() {
 	}
 };
 
+Template.groupPage.events({
+	'click button.btnLeaveGroup' : function() {
+		var groupId = Session.get('currentGroupId');
+		Meteor.call("leaveGroup", groupId, function(data, err){
+			Meteor.Router.to('/');
+		});
+	}
+})
+
 Template.groupPage.events(okCancelEvents('#invite', {
 	ok: function(text, evt){
 		var groupId = Session.get('currentGroupId');
