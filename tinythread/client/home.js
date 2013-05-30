@@ -16,3 +16,20 @@ Template.home.group = function() {
 		return Groups.find({$or: [{_id : {$in: Meteor.user().groups}}, {_id : {$in: Meteor.user().owned_groups}}]});
 	}
 }
+
+Template.home.hasInvites = function() {
+	if (Meteor.user())
+	{
+		if (Meteor.user().invites.length > 0)
+			return true;
+	}
+	else
+		return false;
+}
+
+Template.home.invite = function() {
+	if (Meteor.user())
+	{
+		return Meteor.user().invites;
+	}
+}

@@ -14,7 +14,7 @@ Threads.allow({
 });
 
 Meteor.publish("directory", function(){
-	return Meteor.users.find({}, {fields: {'groups': 1, 'owned_groups': 1}});
+	return Meteor.users.find({}, {fields: {'groups': 1, 'owned_groups': 1, 'invites': 1}});
 });
 
 Meteor.publish("threads", function(){

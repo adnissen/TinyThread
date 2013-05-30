@@ -193,6 +193,22 @@
   </div>
   {{/each}} 
 
+  {{#if hasInvites}}
+
+  {{/if}}
+  <div class="row replyname">
+    <div class="span6 offset1">
+  <h4>Invites:</h4>
+  </div>
+  </div>
+
+  <div class='row list'>
+    <div class="span6 offset1">
+      {{#each invite}}
+      
+      {{/each}}
+    </div>
+  </div>
   {{else}}
   {{/if}}
   </template>

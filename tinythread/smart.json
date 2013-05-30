@@ -4,6 +4,7 @@
     "branch": "devel"
   },
   "packages": {
-    "router": {}
+    "router": {},
+    "accounts-ui-bootstrap-dropdown": {}
   }
 }
