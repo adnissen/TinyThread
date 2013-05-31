@@ -104,6 +104,20 @@ Meteor.methods({
 
 		}
 	},
+	declineGroup: function(_group)
+	{
+		if (Meteor.userId() != null)
+		{
+			if (Meteor.user().owned_groups.indexOf(_group) > -1 || Meteor.user().groups.indexOf(_group) > -1)
+				return null;
+			else if (Meteor.user().invites.indexOf(_group) > -1)
+			{
+				Meteor.users.update({_id: Meteor.userId()}, {$push: {groups: _group}});
+				Meteor.users.update({_id: Meteor.userId()}, {$pull: {invites: _group}});
+			}
+
+		}
+	},
 	leaveGroup: function(_group)
 	{
 		if (Meteor.userId() != null)

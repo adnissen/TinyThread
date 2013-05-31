@@ -154,8 +154,10 @@
       <div class="navbar-inner">
         <ul class="nav">
           <li><a href="/">rltalk.io</a></li>
+          {{#if loggedIn}}
           <li><a href="/posts/new">New Post</a></li>
           <li><a href="/groups/new">New Group</a></li>
+          {{/if}}
           <li class="navLink">{{loginButtons}}</li>
         </ul>
       </div>
@@ -203,7 +205,10 @@
   <div class='row list'>
     <div class="span6 offset1">
       {{#each invite}}
-      {{this.name}}
+      <div class="invite">
+        {{this.name}}<br>
+        <button class="btn btn-link invAccept">accept</button><button class="btn btn-link invDecline">decline</button>
+      </div>
       {{/each}}
     </div>
   </div>

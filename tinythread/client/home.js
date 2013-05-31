@@ -42,3 +42,13 @@ Template.home.invite = function() {
 		return invites;
 	}
 }
+
+Template.home.events({
+  	'click button.invAccept' : function(){
+  		Meteor.call("acceptGroup", this.id);
+  	},
+
+  	'click button.invDecline' : function(){
+  		Meteor.call("declineGroup", this.id);
+  	}
+});
