@@ -211,6 +211,10 @@ Meteor.methods({
 	//add a comment
 	addReply:function(_thread, _content)
 	{
+		if (!_content || /^\s*$/.test(_content))
+		{
+			return;
+		}
 		//make sure they're logged in and can comment
 		if (Meteor.userId() != null && Meteor.user().authList.indexOf(_thread) > -1)
 		{
