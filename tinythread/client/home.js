@@ -6,6 +6,14 @@ Template.home.threadCount = function() {
 	return Threads.find().count();
 }
 
+Template.home.groupCount = function() {
+	if (Meteor.user() && Meteor.user().groups && Meteor.user().owned_groups)
+	{
+		//handlebars just takes anything that isn't 'falsy' andn renders it
+		return Meteor.user().groups + Meteor.user().owned_groups;
+	}
+}
+
 Template.home.thread = function() {
 	return Threads.find({}, {sort: {time: -1}});
 }

@@ -81,6 +81,10 @@
       font-size: 16px;
     }
 
+    .linkBtn{
+      padding-left: 5px;
+    }
+
     .navbar-inner {
       background-color: #3498db; 
       background-image: none;
@@ -182,6 +186,8 @@
   {{else}}
   <h2>You're not a part of any threads! Why don't you make one?</h2>
   {{/if}}
+
+  {{#if groupCount}}
   <div class="row replyname">
     <div class="span6 offset1">
   <h4>Groups:</h4>
@@ -194,6 +200,8 @@
     </div>
   </div>
   {{/each}} 
+
+  {{/if}}
 
   {{#if hasInvites}}
   <div class="row replyname">
