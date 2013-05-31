@@ -18,7 +18,7 @@ Template.home.group = function() {
 }
 
 Template.home.hasInvites = function() {
-	if (Meteor.user())
+	if (Meteor.user() && Meteor.user().invites)
 	{
 		if (Meteor.user().invites.length > 0)
 			return true;
