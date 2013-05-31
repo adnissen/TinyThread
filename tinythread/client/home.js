@@ -28,7 +28,7 @@ Template.home.hasInvites = function() {
 }
 
 Template.home.invite = function() {
-	if (Meteor.user())
+	if (Meteor.user() && Meteor.user().invites)
 	{
 		return Meteor.user().invites;
 	}
