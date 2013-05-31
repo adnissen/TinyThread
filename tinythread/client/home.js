@@ -30,6 +30,15 @@ Template.home.hasInvites = function() {
 Template.home.invite = function() {
 	if (Meteor.user() && Meteor.user().invites)
 	{
-		return Meteor.user().invites;
+		inviteIds = Meteor.user().invites;
+		var invites = [];
+		for (var i = 0; i < inviteIds.length; i++) {
+			var obj = {
+				name: Groups.findOne({_id: inviteIds[i]}).name,
+				id: inviteIds[i]
+			}
+			invites.push(obj);
+		}
+		return invites;
 	}
 }
