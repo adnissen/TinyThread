@@ -189,7 +189,7 @@ Meteor.methods({
 			var group = Groups.findOne({_id: _thread});
 			if (Meteor.user().authList.indexOf(_thread) > -1)
 			{
-				Meteor.users.update({authList: _thread}, {$pull: {authList: _thread}});
+				Meteor.users.update({_id: Meteor.userId()}, {$pull: {authList: _thread}});
 			}
 		}
 	},
